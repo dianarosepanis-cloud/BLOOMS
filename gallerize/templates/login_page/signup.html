@@ -27,7 +27,6 @@
                     <div class="flex items-center space-x-2 mb-1">
                         <span class="text-[10px] font-bold uppercase tracking-widest text-red-800">Registration Discrepancy</span>
                     </div>
-                    {% endfor %}
                     {% for error in form.non_field_errors %}
                         <p class="leading-relaxed text-stone-500">{{ error }}</p>
                     {% endfor %}
