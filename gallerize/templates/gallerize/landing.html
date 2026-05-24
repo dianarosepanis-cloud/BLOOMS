@@ -1,0 +1,132 @@
+{% extends 'gallerize/base.html' %}
+{% load static %}
+
+{% block title %}Gallerize | A Sanctuary for Your Imagery{% endblock %}
+
+{% block content %}
+<div class="relative overflow-hidden antialiased">
+    
+    <section class="min-h-[90vh] flex flex-col items-center justify-center relative px-6 sm:px-8 lg:px-12 pt-28 pb-20">
+        
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-stone-100 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-4xl text-center z-10 space-y-8 mb-16">
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-serif font-light text-stone-900 tracking-tight leading-[1.1]">
+                Elevate your archive,<br />
+                <span class="text-amber-900 italic font-normal block mt-2 sm:inline sm:mt-0">
+                    frame by curated frame.
+                </span>
+            </h1>
+            
+            <p class="text-xs sm:text-sm font-light text-stone-500 max-w-xl mx-auto leading-relaxed tracking-wide">
+                A digital exhibition room for mindful photographers. Escape disorganized folders and let your visual stories breathe inside beautifully tailored collections.
+            </p>
+            
+            <div class="pt-4 flex flex-col sm:flex-row justify-center items-center gap-4 max-w-xs mx-auto">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'album_list' %}" class="w-full px-8 py-4 bg-stone-900 hover:bg-amber-950 text-white font-semibold uppercase tracking-widest rounded-full text-[11px] transition-all duration-300 shadow-xs hover:shadow-md active:scale-[0.98] text-center cursor-pointer">
+                        Enter Your Galleries
+                    </a>
+                {% else %}
+                    <a href="{% url 'signup' %}" class="w-full px-8 py-4 bg-stone-900 hover:bg-amber-950 text-white font-semibold uppercase tracking-widest rounded-full text-[11px] transition-all duration-300 shadow-xs hover:shadow-md active:scale-[0.98] text-center cursor-pointer">
+                        Begin Curating
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="w-full max-w-5xl mx-auto z-10 px-2 sm:px-4 opacity-95 hover:opacity-100 transition-opacity duration-500">
+            <div class="bg-white border border-stone-200/60 p-3 sm:p-4 rounded-2xl shadow-sm">
+                <div class="aspect-video w-full rounded-xl overflow-hidden bg-stone-50 relative group">
+                    <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=1600" 
+                         alt="Minimal fine-art photography gallery wall environment" 
+                         class="w-full h-full object-cover grayscale-[20%] contrast-[1.02] group-hover:scale-[1.03] transition-transform duration-[1200ms] ease-out" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-stone-900/20 via-transparent to-transparent flex items-end p-6">
+                        <span class="text-[9px] tracking-[0.2em] font-bold text-stone-800 uppercase bg-white/95 backdrop-blur-md px-4 py-2 rounded-full border border-stone-100 shadow-xs">
+                            Exhibition Workspace Preview
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-32 max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 border-t border-stone-100">
+        
+        <div class="text-center max-w-2xl mx-auto mb-24 space-y-4">
+            <h2 class="text-3xl font-serif font-light tracking-tight text-stone-900">
+                The Art of Curation
+            </h2>
+            <div class="w-8 h-[1px] bg-amber-900/40 mx-auto"></div>
+            <p class="text-stone-400 font-medium text-[10px] uppercase tracking-[0.2em] pt-2">
+                A quiet space built for visual preservation, allowing your work to exist exactly as intended.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            
+            <div class="group bg-white border border-stone-200/50 p-8 rounded-2xl transition-all duration-300 hover:border-stone-300 hover:shadow-md">
+                <div class="w-full aspect-4/3 mb-6 bg-stone-50 rounded-xl overflow-hidden border border-stone-100">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800" 
+                         alt="Organic fine dynamic texture detailed landscape image" 
+                         class="w-full h-full object-cover grayscale-[15%] opacity-90 group-hover:scale-[1.04] transition-transform duration-700" />
+                </div>
+                <div class="flex items-center gap-2.5 mb-3">
+                    <span class="text-[11px] font-serif italic text-amber-900 font-medium">01 //</span>
+                    <h3 class="text-xs font-bold uppercase tracking-[0.15em] text-stone-900">Pure Fidelity Storage</h3>
+                </div>
+                <p class="text-stone-400 text-xs font-light tracking-wide leading-relaxed pl-8">
+                    No aggressive algorithms, no compressed hues. Safeguard the pristine raw parameters, dynamic tonality, and native resolution of every frame.
+                </p>
+            </div>
+
+            <div class="group bg-white border border-stone-200/50 p-8 rounded-2xl transition-all duration-300 hover:border-stone-300 hover:shadow-md">
+                <div class="w-full aspect-4/3 mb-6 bg-stone-50/60 rounded-xl flex items-center justify-center border border-stone-100 relative overflow-hidden">
+                    <div class="w-2/3 h-2/3 border border-stone-200/80 rounded-xl p-4 flex flex-col justify-between bg-white shadow-2xs z-10 transition-colors duration-500 group-hover:border-stone-300">
+                        <div class="flex gap-1.5">
+                            <div class="w-1.5 h-1.5 rounded-full bg-amber-800/30"></div>
+                            <div class="w-10 h-1.5 rounded bg-stone-100"></div>
+                        </div>
+                        <div class="w-full h-12 bg-stone-50/50 rounded-lg border border-stone-100 flex items-center justify-center">
+                            <div class="w-4 h-4 border border-dashed border-stone-300 rounded-sm"></div>
+                        </div>
+                        <div class="w-1/2 h-1.5 rounded bg-stone-100"></div>
+                    </div>
+                    <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-stone-100/50 rounded-full blur-xl"></div>
+                </div>
+                <div class="flex items-center gap-2.5 mb-3">
+                    <span class="text-[11px] font-serif italic text-amber-900 font-medium">02 //</span>
+                    <h3 class="text-xs font-bold uppercase tracking-[0.15em] text-stone-900">Tailored Series Indexing</h3>
+                </div>
+                <p class="text-stone-400 text-xs font-light tracking-wide leading-relaxed pl-8">
+                    Organize your photographic series by concept, narrative, or material. Build minimal architectural indexes that make archival sorting a pleasure.
+                </p>
+            </div>
+
+            <div class="group bg-white border border-stone-200/50 p-8 rounded-2xl transition-all duration-300 hover:border-stone-300 hover:shadow-md">
+                <div class="w-full aspect-4/3 mb-6 bg-stone-50/60 rounded-xl flex items-center justify-center border border-stone-100 relative overflow-hidden px-4">
+                    <div class="w-full border border-stone-200 rounded-t-xl bg-white h-24 pt-2 px-2.5 space-y-2 transition-colors duration-500 group-hover:border-stone-300">
+                        <div class="h-2 w-full bg-stone-50 rounded-md flex justify-between px-1.5 items-center">
+                            <div class="w-3 h-1 bg-stone-200 rounded-xs"></div>
+                            <div class="w-1 h-1 bg-stone-200 rounded-full"></div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-1.5">
+                            <div class="aspect-square bg-stone-50 rounded-md border border-stone-100"></div>
+                            <div class="aspect-square bg-stone-100/40 rounded-md border border-stone-100"></div>
+                            <div class="aspect-square bg-stone-50 rounded-md border border-stone-100"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2.5 mb-3">
+                    <span class="text-[11px] font-serif italic text-amber-900 font-medium">03 //</span>
+                    <h3 class="text-xs font-bold uppercase tracking-[0.15em] text-stone-900">Balanced Visual Scale</h3>
+                </div>
+                <p class="text-stone-400 text-xs font-light tracking-wide leading-relaxed pl-8">
+                    An interface built entirely to step back. Your digital portfolios scale adaptively, framing your spatial configurations with graphic respect.
+                </p>
+            </div>
+
+        </div>
+    </section>
+</div>
+{% endblock %}

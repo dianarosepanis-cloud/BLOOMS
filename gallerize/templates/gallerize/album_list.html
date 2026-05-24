@@ -1,0 +1,83 @@
+{% extends 'gallerize/base.html' %}
+{% load static %}
+
+{% block title %}Archives | Blooms{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-20 antialiased">
+    
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between border-b border-stone-200/60 pb-10 mb-16">
+        <div class="space-y-4">
+            <div class="flex items-center gap-2.5 text-[10px] font-bold uppercase tracking-[0.2em] text-stone-400">
+                <span class="w-1.5 h-1.5 bg-amber-600/40 rounded-full"></span>
+                <span>Studio Collection</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl font-serif font-light text-stone-900 tracking-tight leading-none">
+                The <span class="italic font-normal text-amber-900">Archive</span>
+            </h1>
+            <p class="text-xs sm:text-sm text-stone-500 font-light max-w-xl leading-relaxed tracking-wide">
+                A seamless, meticulously cataloged registry of your complete visual repository and permanent collections.
+            </p>
+        </div>
+        
+        <div class="mt-6 md:mt-0">
+            <a href="{% url 'album_create' %}" class="inline-flex items-center justify-center px-6 py-3.5 bg-stone-900 hover:bg-amber-950 text-white text-[11px] font-semibold uppercase tracking-widest rounded-full transition-all duration-500 shadow-sm hover:shadow-md active:scale-[0.98]">
+                Add New Entry
+            </a>
+        </div>
+    </div>
+
+    {% if albums %}
+        <div class="grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {% for album in albums %}
+                <div class="group relative flex flex-col space-y-4">
+                    
+                    <div class="aspect-[3/4] w-full bg-stone-50 rounded-xl overflow-hidden relative border border-stone-200/60 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:shadow-2xl group-hover:shadow-stone-200/60 group-hover:border-stone-300">
+                        {% if album.cover_image %}
+                            <img src="{{ album.cover_image.url }}" 
+                                 alt="{{ album.title }} Artwork Cover" 
+                                 class="h-full w-full object-cover scale-[1.01] group-hover:scale-105 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]">
+                        {% else %}
+                            <div class="flex h-full w-full items-center justify-center bg-gradient-to-b from-stone-50 to-stone-100/60 text-stone-300 group-hover:text-amber-800/50 transition-colors duration-500">
+                                <svg class="h-6 w-6 stroke-[1.2]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-.778.099-1.533.284-2.253" />
+                                </svg>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="px-1 flex flex-1 flex-col justify-between space-y-2">
+                        <h3 class="font-serif font-medium text-stone-950 text-base group-hover:text-amber-900 transition-colors duration-500 truncate">
+                            <a href="{% url 'album_detail' album.pk %}" class="block">
+                                <span aria-hidden="true" class="absolute inset-0"></span>
+                                {{ album.title }}
+                            </a>
+                        </h3>
+                        
+                        <div class="flex items-center justify-between text-[10px] font-semibold uppercase tracking-widest text-stone-400 pt-2 border-t border-stone-100">
+                            <span>Catalog Date</span>
+                            <span class="text-stone-600 font-medium font-sans tracking-normal">{{ album.release_date|date:"Y" }}</span>
+                        </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center border border-stone-200/60 py-32 px-6 bg-stone-50/30 max-w-xl mx-auto my-12 rounded-3xl">
+            <svg class="mx-auto h-6 w-6 text-stone-300 stroke-[1.2] mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 10.5v6m3-3H9m4.06-7.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
+            </svg>
+            <h3 class="text-xl font-serif font-light text-stone-800 tracking-tight">Archive Unpopulated</h3>
+            <p class="text-xs text-stone-400 font-light max-w-xs mx-auto mt-2 mb-8 leading-relaxed tracking-wide">
+                No volumes have been structured into the catalog layout template engine yet.
+            </p>
+            <div>
+                <a href="{% url 'album_create' %}" class="inline-flex items-center justify-center px-6 py-3 bg-stone-900 hover:bg-amber-950 text-white text-[11px] font-semibold uppercase tracking-widest rounded-full transition-all duration-300 shadow-sm">
+                    Initialize Album
+                </a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
